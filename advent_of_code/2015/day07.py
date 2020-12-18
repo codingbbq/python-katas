@@ -5,6 +5,11 @@ class Solution2015:
             ii = str(i).split("->")
             input = ii[0].strip()
             output = ii[1].strip()
+
+            # For puzzle 2
+            if "b" in mapOfKnownInputs:
+                mapOfKnownInputs['b'] = 956
+            
             if input.isdigit():
                 mapOfKnownInputs[output] = input
                 remove = True
@@ -61,9 +66,11 @@ class Solution2015:
             if remove == True:
                 instructions[indice] = 0
 
-        instructions = [t for t in instructions if t != 0]
-        while(len(instructions) > 0):
-            self.processInstructions(instructions, mapOfKnownInputs)
+        updatedInstructions = []
+        updatedInstructions = [t for t in instructions if t != 0]
+        
+        if(len(updatedInstructions) > 0):
+            self.processInstructions(updatedInstructions, mapOfKnownInputs)
 
         return mapOfKnownInputs
 
@@ -96,9 +103,6 @@ class Solution2015:
 with open("./advent_of_code/2015/input/day07.txt", "r") as file:
     inpt = [line.rstrip() for line in file.readlines()]
 
-    # inpt = [
-    #     "1 And r -> s",
-    # ]
     mapOfKnownInputs = {}
     puzzle1 = Solution2015().processInstructions(inpt, mapOfKnownInputs)
-    print(puzzle1)
+    print(puzzle1['a'])

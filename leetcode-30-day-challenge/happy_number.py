@@ -3,21 +3,22 @@
 
 class Solution:
     def isHappy(self, n: int) -> bool:
-    
-        while n <= 2147483647:
+        seen = {}
+        while n > 1:
             sum = 0
             while n != 0:
                 sum+= pow(n%10, 2)
                 n = n//10
-
-            print(sum)
+                
+            if sum in seen:
+                return False
+            else:
+                seen[sum] = True
             n = sum
-            if n == 1:
-                return True
 
-        return False
+        return True
         
 
 
-sol = Solution().isHappy(n = 7)
+sol = Solution().isHappy(n = 2)
 print(sol)

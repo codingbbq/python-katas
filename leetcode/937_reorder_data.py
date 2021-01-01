@@ -26,23 +26,31 @@ class Solution:
         # We have the index and we also have an unsorted array
         # Let us use quicksort to sort from 0 to index-1
         self.quickSort(logs, 0, index-1)
-
         return logs
+        
 
     def quickSort(self, arr, start, end):
         if start >= end:
             return
 
-        index = self.partition(arr, start, end)
-        self.quickSort(arr, start, index-1)
-        self.quickSort(arr, index+1, end)
+        zIndex = self.partition(arr, start, end)
+        self.quickSort(arr, start, zIndex-1)
+        self.quickSort(arr, zIndex+1, end)
     
     def partition(self, arr, start, end):
-        pivotIndex = 0
+        pivotIndex = start
         pivotValue = arr[end]
-        for u in range(end):
-            if arr[u] < 
+        for u in range(start, end):
+            uVal = ord(arr[u].split(" ")[1][0])
+            pVal = ord(pivotValue.split(" ")[1][0])
+            if uVal < pVal:
+                # Swap the values
+                arr[u], arr[pivotIndex] = arr[pivotIndex], arr[u]
+                pivotIndex+=1
         
+        arr[pivotIndex], arr[end] = arr[end], arr[pivotIndex]
+        return pivotIndex
 
-sol = Solution().reorderLogFiles(logs = ["dig1 8 1 5 1","let1 brt can","dig2 3 6","let2 own kit dig","let3 art zero"])
+
+sol = Solution().reorderLogFiles(logs = ["dig1 8 1 5 1","let1 art can","dig2 3 6","let2 own kit dig","let3 art zero"])
 print(sol)
